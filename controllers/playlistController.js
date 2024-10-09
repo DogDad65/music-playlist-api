@@ -4,13 +4,14 @@ const { fetchSpotifyTrackDetails } = require('../services/spotifyService');
 // Create a playlist
 exports.createPlaylist = async (req, res) => {
   try {
-    const { name, tracks } = req.body;
-    const author = req.userId;
+    const { name, description } = req.body;
+    const author = req.userId; // Assuming user authentication provides `userId`
 
     const newPlaylist = new Playlist({
       name,
+      description,
       author,
-      tracks: tracks || []
+      tracks: []
     });
 
     await newPlaylist.save();
